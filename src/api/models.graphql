@@ -1,0 +1,71 @@
+type Group {
+  id: ID!
+  name: String!
+  description: String!
+  images: [File!]!
+  markers: [Marker!]!
+  reports: [Report!]!
+  references: [Reference!]!
+  createdAt: String!
+  updatedAt: String!
+}
+
+type File {
+  id: ID!
+  url: String!
+  group: Group
+  createdAt: String!
+  updatedAt: String!
+}
+
+type Report {
+  id: ID!
+  type: String!
+  marker: Marker
+  group: Group
+  description: String!
+  reponseMail: String!
+  createdAt: String!
+  updatedAt: String!
+}
+
+type Marker {
+  id: ID!
+  isDeleted: Boolean
+  group: Group!
+  latitude: Float!
+  longitude: Float!
+  title: String!
+  description: String!
+  address: String!
+  reports: [Report!]
+  reference: Reference!
+  createdAt: String!
+  updatedAt: String!
+}
+
+type CheckList {
+  id: ID!
+  test: String!
+  reference: Reference!
+  judge: String!
+  createdAt: String!
+  updatedAt: String!
+}
+
+type Reference {
+  id: ID!
+  text: String!
+  url: String
+  createdAt: String!
+  updatedAt: String!
+}
+
+type ClinicCenter {
+  id: ID!
+  name: String!
+  phoneNumber: String
+  url: String!
+  createdAt: String!
+  updatedAt: String!
+}

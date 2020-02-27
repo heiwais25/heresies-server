@@ -1,0 +1,71 @@
+type Group {
+  id: ID! @id
+  name: String! @unique
+  description: String!
+  images: [File!]! @relation(name: "FilesOfGroup", onDelete:CASCADE)
+  markers: [Marker!]! @relation(name: "MarkerOfGroup", onDelete:CASCADE)
+  reports: [Report!]! @relation(name: "ReportOfGroup")
+  references: [Reference!]!
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
+}
+
+type File {
+  id: ID! @id
+  url: String!
+  group: Group @relation(name: "FilesOfGroup")
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
+}
+
+type Report {
+  id: ID! @id
+  type: String!
+  marker: Marker @relation(name: "ReportOfMarker")
+  group: Group @relation(name: "ReportOfGroup")
+  description: String!
+  reponseMail: String!
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
+}
+
+type Marker {
+  id: ID! @id
+  isDeleted: Boolean @default(value: false)
+  group: Group! @relation(name: "MarkerOfGroup")
+  latitude: Float!
+  longitude: Float!
+  title: String!
+  description: String!
+  address: String!
+  reports: [Report!] @relation(name: "ReportOfMarker")
+  reference: Reference!
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
+}
+
+type CheckList {
+  id: ID! @id
+  test: String!
+  reference: Reference!
+  judge: Json!
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
+}
+
+type Reference {
+  id: ID! @id
+  text: String!
+  url: String
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
+}
+
+type ClinicCenter {
+  id:ID! @id
+  name: String! @unique
+  phoneNumber: String
+  url: String!
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
+}

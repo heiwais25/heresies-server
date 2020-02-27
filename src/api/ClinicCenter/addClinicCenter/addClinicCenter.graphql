@@ -1,0 +1,11 @@
+type Mutation {
+  addClinicCenter(
+    name: String!
+    phoneNumber: String
+    url: String!
+  ): ClinicCenter!
+}
+
+type Query {
+  sample: String!
+}

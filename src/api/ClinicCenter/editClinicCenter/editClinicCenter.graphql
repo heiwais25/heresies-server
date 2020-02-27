@@ -1,0 +1,8 @@
+type Mutation {
+  editClinicCenter(
+    id: String!
+    name: String
+    phoneNumber: String
+    url: String
+  ): ClinicCenter!
+}
