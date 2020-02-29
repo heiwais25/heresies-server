@@ -1,0 +1,7 @@
+type Mutation {
+  addGroup(
+    name: String!
+    description: String!
+    referenceIds: [String!]!
+  ): Group!
+}

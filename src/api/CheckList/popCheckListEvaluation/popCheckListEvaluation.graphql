@@ -1,0 +1,3 @@
+type Mutation {
+  popCheckListEvaluation(id: String!): Boolean!
+}

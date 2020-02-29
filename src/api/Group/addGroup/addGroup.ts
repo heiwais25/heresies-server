@@ -1,0 +1,26 @@
+import { prisma } from "../../../../generated/prisma-client/index";
+type Args = {
+  name: string;
+  description: string;
+  referenceIds: [string];
+};
+
+export default {
+  Mutation: {
+    addGroup: async (_, args: Args) => {
+      const { name, description, referenceIds } = args;
+      try {
+        return prisma.createGroup({
+          name,
+          description,
+          references: {
+            connect: referenceIds.map(id => ({ id }))
+          }
+        });
+      } catch (err) {
+        console.log(err);
+        throw Error(err);
+      }
+    }
+  }
+};

@@ -1,0 +1,10 @@
+type Query {
+  searchReport(
+    typeId: String
+    description: String
+    groupId: String
+    responseMail: String
+    isProcessed: Boolean
+    responseText: String
+  ): [Report!]!
+}

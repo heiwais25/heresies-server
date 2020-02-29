@@ -1,0 +1,3 @@
+type Mutation {
+  solveReport(id: String!, responseText: String!): Report!
+}

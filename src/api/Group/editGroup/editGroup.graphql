@@ -1,0 +1,8 @@
+type Mutation {
+  editGroup(
+    id: String!
+    name: String
+    description: String
+    referenceIds: [String!]
+  ): Group!
+}

@@ -1,0 +1,6 @@
+type Mutation {
+  pushCheckListEvaluation(
+    checkListId: String!
+    evaluation: Evaluation!
+  ): CheckListEvaluation!
+}

@@ -6,6 +6,7 @@ type Group {
   markers: [Marker!]!
   reports: [Report!]!
   references: [Reference!]!
+  checkList: [CheckList!]!
   createdAt: String!
   updatedAt: String!
 }
@@ -13,6 +14,7 @@ type Group {
 type File {
   id: ID!
   url: String!
+  caption: String!
   group: Group
   createdAt: String!
   updatedAt: String!
@@ -20,11 +22,21 @@ type File {
 
 type Report {
   id: ID!
-  type: String!
+  type: ReportType!
+  description: String!
+  responseMail: String
   marker: Marker
   group: Group
-  description: String!
-  reponseMail: String!
+  isProcessed: Boolean
+  responseText: String
+  createdAt: String!
+  updatedAt: String!
+}
+
+type ReportType {
+  id: ID!
+  value: String!
+  reports: [Report!]
   createdAt: String!
   updatedAt: String!
 }
@@ -46,17 +58,33 @@ type Marker {
 
 type CheckList {
   id: ID!
-  test: String!
+  name: String!
+  problem: String!
+  evaluations: [CheckListEvaluation!]!
+  group: Group!
   reference: Reference!
+  createdAt: String!
+  updatedAt: String!
+}
+
+type CheckListEvaluation {
+  id: ID!
+  from: Int!
+  to: Int!
+  minCheckNum: Int!
   judge: String!
+  checkList: CheckList!
   createdAt: String!
   updatedAt: String!
 }
 
 type Reference {
   id: ID!
-  text: String!
-  url: String
+  name: String!
+  url: String!
+  checkLists: [CheckList!]!
+  markers: [Marker!]!
+  groups: [Group!]!
   createdAt: String!
   updatedAt: String!
 }
@@ -68,4 +96,11 @@ type ClinicCenter {
   url: String!
   createdAt: String!
   updatedAt: String!
+}
+
+input Evaluation {
+  from: Int!
+  to: Int!
+  minCheckNum: Int!
+  judge: String!
 }

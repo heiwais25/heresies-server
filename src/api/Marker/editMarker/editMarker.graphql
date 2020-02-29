@@ -1,0 +1,12 @@
+type Mutation {
+  editMarker(
+    id: String!
+    title: String
+    description: String
+    address: String
+    latitude: Float
+    longitude: Float
+    groupId: String
+    referenceId: String
+  ): Marker!
+}

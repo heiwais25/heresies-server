@@ -5,7 +5,8 @@ type Group {
   images: [File!]! @relation(name: "FilesOfGroup", onDelete:CASCADE)
   markers: [Marker!]! @relation(name: "MarkerOfGroup", onDelete:CASCADE)
   reports: [Report!]! @relation(name: "ReportOfGroup")
-  references: [Reference!]!
+  references: [Reference!]! @relation(name: "GroupOfReference")
+  checkList: [CheckList!]! @relation(name: "CheckListOfGroup", onDelete:CASCADE)
   createdAt: DateTime! @createdAt
   updatedAt: DateTime! @updatedAt
 }
@@ -13,6 +14,7 @@ type Group {
 type File {
   id: ID! @id
   url: String!
+  caption: String!
   group: Group @relation(name: "FilesOfGroup")
   createdAt: DateTime! @createdAt
   updatedAt: DateTime! @updatedAt
@@ -20,11 +22,21 @@ type File {
 
 type Report {
   id: ID! @id
-  type: String!
+  type: ReportType! @relation(name:"ReportOfReportType")
+  description: String!
   marker: Marker @relation(name: "ReportOfMarker")
   group: Group @relation(name: "ReportOfGroup")
-  description: String!
-  reponseMail: String!
+  responseMail: String
+  isProcessed: Boolean @default(value: false)
+  responseText: String @default(value: "")
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
+}
+
+type ReportType {
+  id: ID! @id
+  value: String! @unique
+  reports:[Report!] @relation(name: "ReportOfReportType", onDelete:CASCADE)
   createdAt: DateTime! @createdAt
   updatedAt: DateTime! @updatedAt
 }
@@ -38,25 +50,41 @@ type Marker {
   title: String!
   description: String!
   address: String!
-  reports: [Report!] @relation(name: "ReportOfMarker")
-  reference: Reference!
+  reports: [Report!]! @relation(name: "ReportOfMarker")
+  reference: Reference! @relation(name: "MarkerOfReference")
   createdAt: DateTime! @createdAt
   updatedAt: DateTime! @updatedAt
 }
 
 type CheckList {
   id: ID! @id
-  test: String!
-  reference: Reference!
-  judge: Json!
+  name: String! @unique
+  problem: String!
+  evaluations: [CheckListEvaluation!]! @relation(name:"EvaluationOfCheckList", onDelete:CASCADE)
+  group: Group! @relation(name: "CheckListOfGroup")
+  reference: Reference! @relation(name: "CheckListOfReference")
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
+}
+
+type CheckListEvaluation {
+  id:ID! @id
+  from: Int!
+  to: Int!
+  minCheckNum: Int!
+  judge: String!
+  checkList: CheckList! @relation(name:"EvaluationOfCheckList")
   createdAt: DateTime! @createdAt
   updatedAt: DateTime! @updatedAt
 }
 
 type Reference {
   id: ID! @id
-  text: String!
-  url: String
+  name: String! @unique
+  url: String! @unique
+  checkLists: [CheckList!]! @relation(name: "CheckListOfReference", onDelete:CASCADE)
+  markers: [Marker!]! @relation(name: "MarkerOfReference", onDelete:CASCADE)
+  groups: [Group!]! @relation(name: "GroupOfReference", onDelete:CASCADE)
   createdAt: DateTime! @createdAt
   updatedAt: DateTime! @updatedAt
 }

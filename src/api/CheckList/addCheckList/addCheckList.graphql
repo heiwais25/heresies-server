@@ -1,0 +1,9 @@
+type Mutation {
+  addCheckList(
+    name: String!
+    problem: String!
+    referenceId: String!
+    groupId: String!
+    evaluations: [Evaluation!]!
+  ): CheckList!
+}

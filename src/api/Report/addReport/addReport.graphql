@@ -1,0 +1,9 @@
+type Mutation {
+  addReport(
+    typeId: String!
+    description: String!
+    responseMail: String
+    markerId: String
+    groupId: String
+  ): Report!
+}

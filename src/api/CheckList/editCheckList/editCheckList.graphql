@@ -1,0 +1,9 @@
+type Mutation {
+  editCheckList(
+    id: String!
+    name: String
+    problem: String
+    referenceId: String
+    groupId: String
+  ): CheckList!
+}

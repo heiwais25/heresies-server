@@ -1,0 +1,3 @@
+type Mutation {
+  deleteReference(id: String!): Boolean!
+}

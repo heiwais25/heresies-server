@@ -5,7 +5,3 @@ type Mutation {
     url: String!
   ): ClinicCenter!
 }
-
-type Query {
-  sample: String!
-}

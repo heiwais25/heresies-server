@@ -1,0 +1,3 @@
+type Mutation {
+  popReference(groupdId: String!, referenceIds: [String!]!): Group
+}
