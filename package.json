@@ -9,7 +9,9 @@
     "graphql": "^14.6.0",
     "graphql-tools": "^4.0.7",
     "graphql-yoga": "^1.18.3",
+    "jsonwebtoken": "^8.5.1",
     "merge-graphql-schemas": "^1.7.6",
+    "moment": "^2.24.0",
     "morgan": "^1.9.1",
     "multer": "^1.4.2",
     "multer-s3": "^2.9.0",
@@ -27,6 +29,8 @@
     "prisma": "yarn run prisma:deploy && yarn run prisma:generate"
   },
   "devDependencies": {
+    "@types/jsonwebtoken": "^8.3.8",
+    "@types/moment": "^2.13.0",
     "@types/morgan": "^1.7.37",
     "@types/multer": "^1.4.2",
     "@types/multer-s3": "^2.7.7",

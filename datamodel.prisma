@@ -1,3 +1,14 @@
+type User {
+  id: ID! @id
+  username: String! @unique
+  email: String! @unique
+  isAdmin: Boolean @default(value: false)
+  loginSecret: String
+  loginSecretIssuedAt: DateTime
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
+}
+
 type Group {
   id: ID! @id
   name: String! @unique

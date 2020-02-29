@@ -2,6 +2,13 @@ import nodemailer, { SendMailOptions } from "nodemailer";
 import sgTransport from "nodemailer-sendgrid-transport";
 import config from "./config";
 import { Evaluation } from "./api/CheckList/CheckList";
+import { adjectives, nouns } from "./words";
+import jwt from "jsonwebtoken";
+
+export const generateSecret = () => {
+  const randomNumber = Math.floor(Math.random() * adjectives.length);
+  return `${adjectives[randomNumber]} ${nouns[randomNumber]}`;
+};
 
 export const sendMail = async (email: SendMailOptions) => {
   const options = {
@@ -31,6 +38,17 @@ export const sendReportResponseMail = async (
   return sendMail(email);
 };
 
+export const sendSecretMail = async (address: string, secret: string) => {
+  const email = {
+    from: config.adminMail,
+    to: address,
+    subject: "🔒 Login Secret for Heresies 🔒",
+    html: `Hello! Your login secret is <strong>${secret}</strong>. <br/> Copy paste on the app/website to log in`
+  };
+
+  return sendMail(email);
+};
+
 export const isValidCheckListEvaluation = (evaluation: Evaluation) => {
   return (
     evaluation.from > 0 &&
@@ -39,3 +57,5 @@ export const isValidCheckListEvaluation = (evaluation: Evaluation) => {
     evaluation.minCheckNum <= evaluation.to - evaluation.from + 1
   );
 };
+
+export const generateToken = (id: string) => jwt.sign({ id }, config.jwtSecret);

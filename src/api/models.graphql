@@ -1,3 +1,14 @@
+type User {
+  id: ID!
+  username: String!
+  email: String!
+  isAdmin: Boolean
+  loginSecret: String
+  loginSecretIssuedAt: String
+  createdAt: String!
+  updatedAt: String!
+}
+
 type Group {
   id: ID!
   name: String!
