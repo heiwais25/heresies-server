@@ -9,7 +9,6 @@
     "graphql": "^14.6.0",
     "graphql-tools": "^4.0.7",
     "graphql-yoga": "^1.18.3",
-    "lodash": "^4.17.15",
     "merge-graphql-schemas": "^1.7.6",
     "morgan": "^1.9.1",
     "multer": "^1.4.2",
@@ -33,5 +32,9 @@
     "@types/multer-s3": "^2.7.7",
     "@types/nodemailer": "^6.4.0",
     "nodemon": "^2.0.2"
+  },
+  "resolutions": {
+    "**/**/lodash": "^4.17.12",
+    "**/**/marked": "^0.8.0"
   }
 }
