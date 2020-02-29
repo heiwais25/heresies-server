@@ -1,4 +1,5 @@
 import { prisma } from "../../../../generated/prisma-client/index";
+import { Context } from "../../../loaders/graphql";
 type Args = {
   id: string;
   value: string;
@@ -6,7 +7,8 @@ type Args = {
 
 export default {
   Mutation: {
-    editReportType: async (_, args: Args) => {
+    editReportType: async (_, args: Args, { isAuthenticated }: Context) => {
+      isAuthenticated();
       const { id, value } = args;
       try {
         const exist = await prisma.$exists.reportType({ id });

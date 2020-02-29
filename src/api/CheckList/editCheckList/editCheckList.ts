@@ -1,4 +1,5 @@
 import { prisma } from "../../../../generated/prisma-client/index";
+import { Context } from "../../../loaders/graphql";
 type Args = {
   id: string;
   name?: string;
@@ -9,7 +10,8 @@ type Args = {
 
 export default {
   Mutation: {
-    editCheckList: async (_, args: Args) => {
+    editCheckList: async (_, args: Args, { isAuthenticated }: Context) => {
+      isAuthenticated();
       const { id, name, problem, referenceId, groupId } = args;
       try {
         const exist = await prisma.$exists.checkList({ id });

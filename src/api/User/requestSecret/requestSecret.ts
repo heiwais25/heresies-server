@@ -8,13 +8,13 @@ type Args = {
 
 export default {
   Mutation: {
-    requestSecret: async (_, args: Args, { request }: Context) => {
-      console.log(request);
+    requestSecret: async (_, args: Args) => {
       const { email } = args;
       const loginSecret = generateSecret();
       console.log(email, loginSecret);
       try {
         sendSecretMail(email, loginSecret);
+        console.log("here");
         await prisma.updateUser({
           data: { loginSecret, loginSecretIssuedAt: new Date() },
           where: { email }

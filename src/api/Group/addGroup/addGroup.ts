@@ -1,4 +1,5 @@
 import { prisma } from "../../../../generated/prisma-client/index";
+import { Context } from "../../../loaders/graphql";
 type Args = {
   name: string;
   description: string;
@@ -7,7 +8,8 @@ type Args = {
 
 export default {
   Mutation: {
-    addGroup: async (_, args: Args) => {
+    addGroup: async (_, args: Args, { isAuthenticated }: Context) => {
+      isAuthenticated();
       const { name, description, referenceIds } = args;
       try {
         return prisma.createGroup({

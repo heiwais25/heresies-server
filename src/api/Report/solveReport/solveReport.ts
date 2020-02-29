@@ -1,5 +1,6 @@
 import { prisma } from "../../../../generated/prisma-client/index";
 import { sendReportResponseMail } from "../../../utils";
+import { Context } from "../../../loaders/graphql";
 
 type Args = {
   id: string;
@@ -7,7 +8,8 @@ type Args = {
 };
 export default {
   Mutation: {
-    solveReport: async (_, args: Args) => {
+    solveReport: async (_, args: Args, { isAuthenticated }: Context) => {
+      isAuthenticated();
       const { id, responseText } = args;
       try {
         const report = await prisma.report({ id });

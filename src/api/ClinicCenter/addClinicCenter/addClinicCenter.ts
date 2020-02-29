@@ -1,4 +1,5 @@
 import { prisma } from "../../../../generated/prisma-client";
+import { Context } from "../../../loaders/graphql";
 
 type Args = {
   name: string;
@@ -8,7 +9,8 @@ type Args = {
 
 export default {
   Mutation: {
-    addClinicCenter: async (_, args: Args) => {
+    addClinicCenter: async (_, args: Args, { isAuthenticated }: Context) => {
+      isAuthenticated();
       const { name, phoneNumber, url } = args;
       try {
         const clinicCenter = await prisma.createClinicCenter({

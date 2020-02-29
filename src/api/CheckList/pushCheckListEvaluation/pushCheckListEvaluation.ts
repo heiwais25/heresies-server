@@ -1,6 +1,7 @@
 import { prisma } from "../../../../generated/prisma-client/index";
 import { Evaluation } from "../CheckList";
 import { isValidCheckListEvaluation } from "../../../utils";
+import { Context } from "../../../loaders/graphql";
 type Args = {
   checkListId: string;
   evaluation: Evaluation;
@@ -8,7 +9,12 @@ type Args = {
 
 export default {
   Mutation: {
-    pushCheckListEvaluation: async (_, args: Args) => {
+    pushCheckListEvaluation: async (
+      _,
+      args: Args,
+      { isAuthenticated }: Context
+    ) => {
+      isAuthenticated();
       const { checkListId, evaluation } = args;
       try {
         if (!isValidCheckListEvaluation(evaluation)) {

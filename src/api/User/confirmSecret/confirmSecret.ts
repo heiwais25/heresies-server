@@ -36,7 +36,8 @@ export default {
           await prisma.updateUser({
             where: { id: user.id },
             data: {
-              loginSecret: ""
+              loginSecret: "",
+              loginSecretIssuedAt: null
             }
           });
           return generateToken(user.id);

@@ -11,7 +11,7 @@ export default {
       const { username, email } = args;
       // TODO : Verify email is valid
       try {
-        const exist = await prisma.$exists.user({ username });
+        const exist = await prisma.$exists.user({ email });
 
         const userCount = await prisma
           .usersConnection()
@@ -19,7 +19,7 @@ export default {
           .count();
 
         if (exist) {
-          throw Error("This username is already taken");
+          throw Error("This email is already taken");
         }
 
         const isAdmin = userCount === 0;

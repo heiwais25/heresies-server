@@ -1,4 +1,5 @@
 import { prisma } from "../../../../generated/prisma-client/index";
+import { Context } from "../../../loaders/graphql";
 type Args = {
   title: string;
   description: string;
@@ -11,7 +12,8 @@ type Args = {
 
 export default {
   Mutation: {
-    addMarker: (_, args: Args) => {
+    addMarker: (_, args: Args, { isAuthenticated }: Context) => {
+      isAuthenticated();
       const {
         title,
         description,

@@ -1,11 +1,13 @@
 import { prisma } from "../../../../generated/prisma-client/index";
+import { Context } from "../../../loaders/graphql";
 type Args = {
   id: string;
 };
 
 export default {
   Mutation: {
-    deleteCheckList: async (_, args: Args) => {
+    deleteCheckList: async (_, args: Args, { isAuthenticated }: Context) => {
+      isAuthenticated();
       const { id } = args;
       try {
         await prisma.deleteCheckList({ id });

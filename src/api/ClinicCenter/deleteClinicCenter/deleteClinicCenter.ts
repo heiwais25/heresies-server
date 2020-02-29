@@ -1,4 +1,5 @@
 import { prisma } from "../../../../generated/prisma-client";
+import { Context } from "../../../loaders/graphql";
 
 type Args = {
   id: string;
@@ -6,7 +7,8 @@ type Args = {
 
 export default {
   Mutation: {
-    deleteClinicCenter: async (_, args: Args) => {
+    deleteClinicCenter: async (_, args: Args, { isAuthenticated }: Context) => {
+      isAuthenticated();
       const { id } = args;
       try {
         await prisma.deleteClinicCenter({ id });

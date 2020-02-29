@@ -1,4 +1,5 @@
 import { prisma } from "../../../../generated/prisma-client/index";
+import { Context } from "../../../loaders/graphql";
 type Args = {
   typeId: string;
   description: string;
@@ -9,7 +10,8 @@ type Args = {
 
 export default {
   Mutation: {
-    addReport: (_, args: Args) => {
+    addReport: (_, args: Args, { isAuthenticated }: Context) => {
+      isAuthenticated();
       const { typeId, description, responseMail, markerId, groupId } = args;
       try {
         return prisma.createReport({

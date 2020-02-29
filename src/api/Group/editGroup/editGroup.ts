@@ -1,4 +1,5 @@
 import { prisma } from "../../../../generated/prisma-client/index";
+import { Context } from "../../../loaders/graphql";
 type Args = {
   id: string;
   name?: string;
@@ -7,7 +8,8 @@ type Args = {
 
 export default {
   Mutation: {
-    editGroup: async (_, args: Args) => {
+    editGroup: async (_, args: Args, { isAuthenticated }: Context) => {
+      isAuthenticated();
       const { id, name, description } = args;
       try {
         const exist = await prisma.$exists.group({ id });
