@@ -17,7 +17,7 @@ type Group {
   markers: [Marker!]!
   reports: [Report!]!
   references: [Reference!]!
-  checkList: [CheckList!]!
+  checkLists: [CheckList!]!
   createdAt: String!
   updatedAt: String!
 }

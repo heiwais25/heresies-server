@@ -17,7 +17,7 @@ type Group {
   markers: [Marker!]! @relation(name: "MarkerOfGroup", onDelete:CASCADE)
   reports: [Report!]! @relation(name: "ReportOfGroup")
   references: [Reference!]! @relation(name: "GroupOfReference")
-  checkList: [CheckList!]! @relation(name: "CheckListOfGroup", onDelete:CASCADE)
+  checkLists: [CheckList!]! @relation(name: "CheckListOfGroup", onDelete:CASCADE)
   createdAt: DateTime! @createdAt
   updatedAt: DateTime! @updatedAt
 }
@@ -93,9 +93,9 @@ type Reference {
   id: ID! @id
   name: String! @unique
   url: String! @unique
-  checkLists: [CheckList!]! @relation(name: "CheckListOfReference", onDelete:CASCADE)
-  markers: [Marker!]! @relation(name: "MarkerOfReference", onDelete:CASCADE)
-  groups: [Group!]! @relation(name: "GroupOfReference", onDelete:CASCADE)
+  checkLists: [CheckList!]! @relation(name: "CheckListOfReference", onDelete: SET_NULL)
+  markers: [Marker!]! @relation(name: "MarkerOfReference", onDelete: SET_NULL)
+  groups: [Group!]! @relation(name: "GroupOfReference", onDelete: SET_NULL)
   createdAt: DateTime! @createdAt
   updatedAt: DateTime! @updatedAt
 }
